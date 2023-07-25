@@ -8,16 +8,31 @@
         <version>2.5.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.hhcc</groupId>
+    <groupId>io.github.houchaofan-s</groupId>
     <artifactId>CODE-Generations</artifactId>
     <version>1.0.2</version>
+
     <name>CODE-Generations</name>
     <description>CODE-Generations</description>
+    <packaging>jar</packaging>
+    <url>https://github.com/houchaofan-s/CODE-Generations</url>
+
+
     <properties>
         <java.version>8</java.version>
         <mybatis.plus.version>3.5.3.1</mybatis.plus.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+
     <dependencies>
+
+        <dependency>
+            <groupId>io.github.houchaofan-s</groupId>
+            <artifactId>CODE-Generations</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -76,14 +91,99 @@
 
     </dependencies>
 
+
+    <!-- 开源签名证书 -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <!-- 仓库信息 -->
+    <scm>
+        <url>https://github.com/houchaofan-s/CODE-Generations</url>
+        <connection>scm:git:https://github.com/houchaofan-s/CODE-Generations.git</connection>
+    </scm>
+    <!-- 开发人员信息 -->
+    <developers>
+        <developer>
+            <name>hhcc</name>
+            <email>2625188591@qq.com</email>
+            <organization>https://github.com/houchaofan-s/CODE-Generations</organization>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <!-- 中央仓库地址配置，不需要修改 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+
     <build>
+        <!-- 下列插件是发布到中央仓库所需要的，已配置好无需修改 -->
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
+            <!-- 源码生成插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Javadoc文档生成插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- GPG签名插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
 
     <repositories>
         <repository>
