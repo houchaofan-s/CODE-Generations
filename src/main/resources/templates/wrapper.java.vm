@@ -6,7 +6,7 @@ package $!{wrapperPackage};
 
 import lombok.AllArgsConstructor;
 import com.hhcc.modules.common.utils.core.mp.support.BaseEntityWrapper;
-import com.hhcc.modules.common.utils.core.tool.utils.BeanUtil;
+import com.hhcc.modules.common.utils.BeanUtil;
 import $!{package.Entity}.$!{entity};
 #set($voPackage=$package.Entity.replace("entity","vo"))
 import $!{voPackage}.$!{entity}VO;

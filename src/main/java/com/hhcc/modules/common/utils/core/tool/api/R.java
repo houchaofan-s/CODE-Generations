@@ -1,6 +1,6 @@
 package com.hhcc.modules.common.utils.core.tool.api;
 
-import com.hhcc.modules.common.utils.core.tool.utils.ObjectUtil;
+import com.hhcc.modules.common.utils.ObjectUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

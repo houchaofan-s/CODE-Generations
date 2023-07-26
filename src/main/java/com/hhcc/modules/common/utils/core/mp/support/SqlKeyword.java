@@ -1,8 +1,8 @@
 package com.hhcc.modules.common.utils.core.mp.support;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.hhcc.modules.common.utils.core.tool.utils.Func;
-import com.hhcc.modules.common.utils.core.tool.utils.StringUtil;
+import com.hhcc.modules.common.utils.Func;
+import com.hhcc.modules.common.utils.StringUtil;
 
 import java.util.Map;
 

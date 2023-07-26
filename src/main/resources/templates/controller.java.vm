@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import com.hhcc.modules.common.utils.core.mp.support.Condition;
 import com.hhcc.modules.common.utils.core.mp.support.Query;
 import com.hhcc.modules.common.utils.core.tool.api.R;
-import com.hhcc.modules.common.utils.core.tool.utils.Func;
+import com.hhcc.modules.common.utils.Func;
 import org.springframework.web.bind.annotation.*;
 #if($!{superEntityClass})
 import org.springframework.web.bind.annotation.RequestParam;

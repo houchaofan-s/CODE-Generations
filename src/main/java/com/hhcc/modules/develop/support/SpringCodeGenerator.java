@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.hhcc.modules.develop.support;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
@@ -17,9 +12,8 @@ import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
-import com.hhcc.modules.common.utils.core.tool.utils.Func;
-import com.hhcc.modules.common.utils.core.tool.utils.StringUtil;
+import com.hhcc.modules.common.utils.Func;
+import com.hhcc.modules.common.utils.StringUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +22,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public class SpringCodeGenerator {
+
     private static final Logger log = LoggerFactory.getLogger(SpringCodeGenerator.class);
     private String systemName = "saber";
     private String codeName;

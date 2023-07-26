@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hhcc.modules.common.utils.core.tool.support.Kv;
-import com.hhcc.modules.common.utils.core.tool.utils.BeanUtil;
-import com.hhcc.modules.common.utils.core.tool.utils.Func;
-import com.hhcc.modules.common.utils.core.tool.utils.StringUtil;
+import com.hhcc.modules.common.utils.BeanUtil;
+import com.hhcc.modules.common.utils.Func;
+import com.hhcc.modules.common.utils.StringUtil;
 
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import java.util.Map;
 public class Condition {
 
     public static <T> IPage<T> getPage(Query query) {
-        Page<T> page = new Page((long) Func.toInt(query.getCurrent(), 1), (long)Func.toInt(query.getSize(), 10));
+        Page<T> page = new Page((long) (query.getCurrent() == null? 1:query.getCurrent()), (long) (query.getSize() == null ?10:query.getSize()));
         String[] ascArr = Func.toStrArray(query.getAscs());
         String[] descArr = ascArr;
         int var4 = ascArr.length;
@@ -42,10 +41,10 @@ public class Condition {
         return new QueryWrapper(entity);
     }
 
-    public static <T> QueryWrapper<T> getQueryWrapper(Map<String, Object> query, Class<T> clazz) {
-        Kv exclude = Kv.init().set("blade-auth", "blade-auth").set("current", "current").set("size", "size").set("ascs", "ascs").set("descs", "descs");
-        return getQueryWrapper(query, exclude, clazz);
-    }
+//    public static <T> QueryWrapper<T> getQueryWrapper(Map<String, Object> query, Class<T> clazz) {
+//        Kv exclude = Kv.init().set("blade-auth", "blade-auth").set("current", "current").set("size", "size").set("ascs", "ascs").set("descs", "descs");
+//        return getQueryWrapper(query, exclude, clazz);
+//    }
 
     public static <T> QueryWrapper<T> getQueryWrapper(Map<String, Object> query, Map<String, Object> exclude, Class<T> clazz) {
         exclude.forEach((k, v) -> {

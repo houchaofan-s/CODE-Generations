@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhcc.modules.test.mapper.TestMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="testResultMap" type="com.hhcc.modules.test.entity.Test">
+        <id column="id" property="id"/>
+        <result column="count_d" property="countD"/>
+        <result column="tenant_ida" property="tenantIda"/>
+    </resultMap>
+
+
+    <select id="selectTestPage" resultMap="testResultMap">
+        select * from blade_test where is_deleted = 0
+    </select>
+
+</mapper>
