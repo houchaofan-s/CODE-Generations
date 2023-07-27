@@ -31,9 +31,9 @@ generator.setPackageName("com.hhcc.modules.test");
 //后端路径
 generator.setPackageDir("D:\\test\\CODE-Generations\\CODE-Generations");
 //需要去掉的表前缀
-generator.setTablePrefix(new String[]{"blade_"});
+generator.setTablePrefix(new String[]{"hh_"});
 //需要生成的表名
-generator.setIncludeTables(new String[]{"blade_test"});
+generator.setIncludeTables(new String[]{"hh_test"});
 //基础业务字段
 //generator.setSuperEntityColumns(SUPER_ENTITY_COLUMNS);
 //generator.setHasSuperEntity(false);
