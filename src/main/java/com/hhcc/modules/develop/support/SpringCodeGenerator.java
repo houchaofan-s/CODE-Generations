@@ -97,7 +97,7 @@ public class SpringCodeGenerator {
                     .entityBuilder().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel)
                     .enableLombok()
                     .superClass(Func.toStr(this.packageEntityName, "com.hhcc.modules.common.utils.core.mp.base.BaseEntity")).addSuperEntityColumns(this.superEntityColumns).enableFileOverride()
-                    .serviceBuilder().superServiceClass("com.hhcc.modules.common.utils.core.mp.base.BaseService").superServiceImplClass("com.hhcc.modules.common.utils.core.mp.base.BaseServiceImpl").formatServiceFileName("I%sService").formatServiceImplFileName("%sServiceImpl").enableFileOverride()
+//                    .serviceBuilder().superServiceClass("com.hhcc.modules.common.utils.core.mp.base.BaseService").superServiceImplClass("com.hhcc.modules.common.utils.core.mp.base.BaseServiceImpl").formatServiceFileName("I%sService").formatServiceImplFileName("%sServiceImpl").enableFileOverride()
 //                    .serviceBuilder().enableFileOverride()
                     .mapperBuilder().mapperAnnotation(Mapper.class).enableBaseResultMap().enableBaseColumnList().formatMapperFileName("%sMapper").formatXmlFileName("%sMapper").enableFileOverride()
 //                    .controllerBuilder().superClass("com.hhcc.modules.common.utils.core.boot.ctrl.BladeController").formatFileName("%sController").enableRestStyle().enableHyphenStyle().enableFileOverride();

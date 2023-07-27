@@ -4,7 +4,7 @@
 <dependency>
   <groupId>io.github.houchaofan-s</groupId>
   <artifactId>CODE-Generations</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 
@@ -30,7 +30,7 @@ SpringCodeGenerator generator = new SpringCodeGenerator();
 		generator.setIncludeTables(new String[]{"blade_test"});
 		//基础业务字段
 //		generator.setSuperEntityColumns(SUPER_ENTITY_COLUMNS);
-		generator.setHasSuperEntity(false);
+//		generator.setHasSuperEntity(false);
 //		generator.setPackageEntityName("");
 		generator.run();
 ```

@@ -95,9 +95,10 @@ public class CodeGeneratorTest {
 		generator.setPackageDir(API_PATH);
 		generator.setTablePrefix(TABLE_PREFIX);
 		generator.setIncludeTables(INCLUDE_TABLES);
-		generator.setSuperEntityColumns(SUPER_ENTITY_COLUMNS);
-		generator.setHasSuperEntity(false);
-//		generator.setPackageEntityName("");
+
+//		generator.setSuperEntityColumns(SUPER_ENTITY_COLUMNS);
+//		generator.setHasSuperEntity(false);
+		generator.setPackageEntityName("com.hhcc.modules.develop.CodeGenerator");
 		generator.run();
 
 	}
