@@ -1,4 +1,4 @@
-package com.hhcc.modules.common.utils.core.mp.base;
+package com.hhcc.modules.common.core.mp.base;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

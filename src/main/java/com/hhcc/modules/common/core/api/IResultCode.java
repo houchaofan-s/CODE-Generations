@@ -1,4 +1,4 @@
-package com.hhcc.modules.common.utils.core.tool.api;
+package com.hhcc.modules.common.core.api;
 
 import java.io.Serializable;
 

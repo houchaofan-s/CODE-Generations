@@ -1,4 +1,4 @@
-package com.hhcc.modules.common.utils.core.mp.support;
+package com.hhcc.modules.common.core.mp.support;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

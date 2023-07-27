@@ -1,4 +1,4 @@
-package com.hhcc.modules.common.utils.core.mp.support;
+package com.hhcc.modules.common.core.mp.support;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hhcc.modules.common.utils.Func;

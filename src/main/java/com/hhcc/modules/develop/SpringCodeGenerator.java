@@ -1,4 +1,4 @@
-package com.hhcc.modules.develop.support;
+package com.hhcc.modules.develop;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
@@ -9,11 +9,9 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
 import com.hhcc.modules.common.utils.Func;
 import com.hhcc.modules.common.utils.StringUtil;
+import lombok.Data;
 import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +19,14 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+@Data
 public class SpringCodeGenerator {
 
     private static final Logger log = LoggerFactory.getLogger(SpringCodeGenerator.class);
@@ -29,9 +35,6 @@ public class SpringCodeGenerator {
     private String serviceName = "blade-service";
     private String packageName = "org.springblade.test";
     private String packageEntityName;
-
-
-
     private String packageDir;
     private String packageWebDir;
     private String[] tablePrefix = new String[]{"blade_"};
@@ -48,10 +51,6 @@ public class SpringCodeGenerator {
     private String password;
 
     public void run() {
-        Properties props = this.getProperties();
-        String url = Func.toStr(this.url, props.getProperty("spring.datasource.url"));
-        String username = Func.toStr(this.username, props.getProperty("spring.datasource.username"));
-        String password = Func.toStr(this.password, props.getProperty("spring.datasource.password"));
         final String servicePackage = this.serviceName.split("-").length > 1 ? this.serviceName.split("-")[1] : this.serviceName;
         Map<String, Object> customMap = new HashMap(11);
         customMap.put("codeName", this.codeName);
@@ -68,26 +67,8 @@ public class SpringCodeGenerator {
             customFile.put("wrapper.java", "/templates/wrapper.java.vm");
         }
 
-//        if (Func.isNotBlank(this.packageWebDir)) {
-//            if (Func.equals(this.systemName, "sword")) {
-//                customFile.put("action.js", "/templates/sword/action.js.vm");
-//                customFile.put("model.js", "/templates/sword/model.js.vm");
-//                customFile.put("service.js", "/templates/sword/service.js.vm");
-//                customFile.put("list.js", "/templates/sword/list.js.vm");
-//                customFile.put("add.js", "/templates/sword/add.js.vm");
-//                customFile.put("edit.js", "/templates/sword/edit.js.vm");
-//                customFile.put("view.js", "/templates/sword/view.js.vm");
-//            } else if (Func.equals(this.systemName, "saber")) {
-//                customFile.put("api.js", "/templates/saber/api.js.vm");
-//                customFile.put("crud.vue", "/templates/saber/crud.vue.vm");
-//            } else if (Func.equals(this.systemName, "saber3")) {
-//                customFile.put("api.js", "/templates/saber3/api.js.vm");
-//                customFile.put("crud.vue", "/templates/saber3/crud.vue.vm");
-//            }
-//        }
-
-        FastAutoGenerator.create(url, username, password).globalConfig((builder) -> {
-            builder.author(props.getProperty("author")).dateType(DateType.TIME_PACK).enableSwagger().outputDir(this.getOutputDir()).disableOpenDir();
+        FastAutoGenerator.create(this.url, this.username, this.password).globalConfig((builder) -> {
+            builder.author("hhcc").dateType(DateType.TIME_PACK).enableSwagger().outputDir(this.getOutputDir()).disableOpenDir();
         }).packageConfig((builder) -> {
             builder.parent(this.packageName).controller("controller").entity("entity").service("service").serviceImpl("service.impl").mapper("mapper").xml("mapper");
         }).strategyConfig((builder) -> {
@@ -96,7 +77,7 @@ public class SpringCodeGenerator {
                     .addExclude(this.excludeTables)
                     .entityBuilder().naming(NamingStrategy.underline_to_camel).columnNaming(NamingStrategy.underline_to_camel)
                     .enableLombok()
-                    .superClass(Func.toStr(this.packageEntityName, "com.hhcc.modules.common.utils.core.mp.base.BaseEntity")).addSuperEntityColumns(this.superEntityColumns).enableFileOverride()
+                    .superClass(Func.toStr(this.packageEntityName, "com.hhcc.modules.common.core.mp.base.BaseEntity")).addSuperEntityColumns(this.superEntityColumns).enableFileOverride()
 //                    .serviceBuilder().superServiceClass("com.hhcc.modules.common.utils.core.mp.base.BaseService").superServiceImplClass("com.hhcc.modules.common.utils.core.mp.base.BaseServiceImpl").formatServiceFileName("I%sService").formatServiceImplFileName("%sServiceImpl").enableFileOverride()
 //                    .serviceBuilder().enableFileOverride()
                     .mapperBuilder().mapperAnnotation(Mapper.class).enableBaseResultMap().enableBaseColumnList().formatMapperFileName("%sMapper").formatXmlFileName("%sMapper").enableFileOverride()
@@ -139,42 +120,6 @@ public class SpringCodeGenerator {
                         outputPath = SpringCodeGenerator.this.getOutputDir() + "/" + SpringCodeGenerator.this.packageName.replace(".", "/") + "/" + "wrapper" + "/" + entityName + "Wrapper" + ".java";
                     }
 
-//                    if (StringUtil.equals(key, "action.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "actions" + "/" + entityNameLower + ".js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "model.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "models" + "/" + entityNameLower + ".js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "service.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "services" + "/" + entityNameLower + ".js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "list.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "pages" + "/" + StringUtil.upperFirst(servicePackage) + "/" + entityName + "/" + entityName + ".js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "add.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "pages" + "/" + StringUtil.upperFirst(servicePackage) + "/" + entityName + "/" + entityName + "Add.js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "edit.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "pages" + "/" + StringUtil.upperFirst(servicePackage) + "/" + entityName + "/" + entityName + "Edit.js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "view.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "pages" + "/" + StringUtil.upperFirst(servicePackage) + "/" + entityName + "/" + entityName + "View.js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "api.js")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "api" + "/" + servicePackage.toLowerCase() + "/" + entityNameLower + ".js";
-//                    }
-//
-//                    if (StringUtil.equals(key, "crud.vue")) {
-//                        outputPath = BladeCodeGenerator.this.getOutputWebDir() + "/" + "views" + "/" + servicePackage.toLowerCase() + "/" + entityNameLower + ".vue";
-//                    }
-
                     this.outputFile(new File(String.valueOf(outputPath)), objectMap, value, Boolean.TRUE);
                 });
             }
@@ -210,153 +155,4 @@ public class SpringCodeGenerator {
         this.tenantColumn = "tenant_id";
     }
 
-    public String getSystemName() {
-        return this.systemName;
-    }
-
-    public String getCodeName() {
-        return this.codeName;
-    }
-
-    public String getServiceName() {
-        return this.serviceName;
-    }
-
-    public String getPackageName() {
-        return this.packageName;
-    }
-
-    public String getPackageDir() {
-        return this.packageDir;
-    }
-
-    public String getPackageWebDir() {
-        return this.packageWebDir;
-    }
-
-    public String[] getTablePrefix() {
-        return this.tablePrefix;
-    }
-
-    public String[] getIncludeTables() {
-        return this.includeTables;
-    }
-
-    public String[] getExcludeTables() {
-        return this.excludeTables;
-    }
-
-    public Boolean getHasSuperEntity() {
-        return this.hasSuperEntity;
-    }
-
-    public Boolean getHasWrapper() {
-        return this.hasWrapper;
-    }
-
-    public Boolean getHasServiceName() {
-        return this.hasServiceName;
-    }
-
-    public String[] getSuperEntityColumns() {
-        return this.superEntityColumns;
-    }
-
-    public String getTenantColumn() {
-        return this.tenantColumn;
-    }
-
-    public String getDriverName() {
-        return this.driverName;
-    }
-
-    public String getUrl() {
-        return this.url;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-    public String getPackageEntityName() {
-        return packageEntityName;
-    }
-
-    public void setSystemName(final String systemName) {
-        this.systemName = systemName;
-    }
-
-    public void setCodeName(final String codeName) {
-        this.codeName = codeName;
-    }
-
-    public void setServiceName(final String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public void setPackageName(final String packageName) {
-        this.packageName = packageName;
-    }
-
-    public void setPackageDir(final String packageDir) {
-        this.packageDir = packageDir;
-    }
-
-    public void setPackageWebDir(final String packageWebDir) {
-        this.packageWebDir = packageWebDir;
-    }
-
-    public void setTablePrefix(final String[] tablePrefix) {
-        this.tablePrefix = tablePrefix;
-    }
-
-    public void setIncludeTables(final String[] includeTables) {
-        this.includeTables = includeTables;
-    }
-
-    public void setExcludeTables(final String[] excludeTables) {
-        this.excludeTables = excludeTables;
-    }
-
-    public void setHasSuperEntity(final Boolean hasSuperEntity) {
-        this.hasSuperEntity = hasSuperEntity;
-    }
-
-    public void setHasWrapper(final Boolean hasWrapper) {
-        this.hasWrapper = hasWrapper;
-    }
-
-    public void setHasServiceName(final Boolean hasServiceName) {
-        this.hasServiceName = hasServiceName;
-    }
-
-    public void setSuperEntityColumns(final String[] superEntityColumns) {
-        this.superEntityColumns = superEntityColumns;
-    }
-
-    public void setTenantColumn(final String tenantColumn) {
-        this.tenantColumn = tenantColumn;
-    }
-
-    public void setDriverName(final String driverName) {
-        this.driverName = driverName;
-    }
-
-    public void setUrl(final String url) {
-        this.url = url;
-    }
-
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-    public void setPackageEntityName(String packageEntityName) {
-        this.packageEntityName = packageEntityName;
-    }
 }

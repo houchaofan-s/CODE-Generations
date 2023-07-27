@@ -1,6 +1,6 @@
 package com.hhcc.modules;
 
-import com.hhcc.modules.develop.support.SpringCodeGenerator;
+import com.hhcc.modules.develop.SpringCodeGenerator;
 
 /**
  * 代码生成器
@@ -98,7 +98,7 @@ public class CodeGeneratorTest {
 
 //		generator.setSuperEntityColumns(SUPER_ENTITY_COLUMNS);
 //		generator.setHasSuperEntity(false);
-		generator.setPackageEntityName("com.hhcc.modules.develop.CodeGenerator");
+//		generator.setPackageEntityName("");
 		generator.run();
 
 	}

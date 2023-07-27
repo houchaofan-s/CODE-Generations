@@ -10,9 +10,9 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import lombok.AllArgsConstructor;
 import javax.validation.Valid;
 
-import com.hhcc.modules.common.utils.core.mp.support.Condition;
-import com.hhcc.modules.common.utils.core.mp.support.Query;
-import com.hhcc.modules.common.utils.core.tool.api.R;
+import com.hhcc.modules.common.core.mp.support.Condition;
+import com.hhcc.modules.common.core.mp.support.Query;
+import com.hhcc.modules.common.core.api.R;
 import com.hhcc.modules.common.utils.Func;
 import org.springframework.web.bind.annotation.*;
 #if($!{superEntityClass})

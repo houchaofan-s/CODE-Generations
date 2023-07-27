@@ -1,4 +1,4 @@
-package com.hhcc.modules.common.utils.core.tool.api;
+package com.hhcc.modules.common.core.api;
 
 public enum ResultCode implements IResultCode {
     SUCCESS(200, "操作成功"),
