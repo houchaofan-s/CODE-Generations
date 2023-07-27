@@ -8,9 +8,10 @@
         <version>2.5.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>io.github.houchaofan-s</groupId>
+
+    <groupId>CODE-Generations</groupId>
     <artifactId>CODE-Generations</artifactId>
-    <version>1.1.2</version>
+    <version>1.0.4</version>
 
     <name>CODE-Generations</name>
     <description>CODE-Generations</description>
@@ -27,11 +28,11 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>io.github.houchaofan-s</groupId>
-            <artifactId>CODE-Generations</artifactId>
-            <version>1.0.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.github.houchaofan-s</groupId>-->
+<!--            <artifactId>CODE-Generations</artifactId>-->
+<!--            <version>1.0.4</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
